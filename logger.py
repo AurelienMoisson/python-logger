@@ -5,7 +5,7 @@ INFO = 3
 DEBUG = 4
 TRACE = 5
 
-__level_prefixes = [
+level_prefixes = [
     "[FATAL]  :",
     "[ERROR]  :",
     "[WARNING]:",
@@ -14,13 +14,13 @@ __level_prefixes = [
     "[TRACE]  :"
 ]
 
-__level_prefix_colors = [
-    "\033[41;37;1m",
-    "\033[31;1m",
-    "\033[33m",
-    "\033[32m",
-    "\033[36m",
-    "\033[37m"
+colored_level_prefixes = [
+    "\033[41;37;1m[FATAL]\033[0m  \033[31m:\033[0m",
+    "\033[31;1m[ERROR]  :\033[0m",
+    "\033[33m[WARNING]:\033[0m",
+    "\033[32m[INFO]   :\033[0m",
+    "\033[36m[DEBUG]  :\033[0m",
+    "\033[37m[TRACE]  :\033[0m",
 ]
 
 
@@ -60,9 +60,9 @@ def log(level, *args, **kwargs):
     if level <= Settings.log_level:
         if Settings.print_level_prefix:
             if Settings.color_level_prefix:
-                print(__level_prefix_colors[level] + __level_prefixes[level] + STYLE.RESET, end="")
+                print(colored_level_prefixes[level], end="")
             else:
-                print(__level_prefixes[level], end="")
+                print(level_prefixes[level], end="")
         style = False
         if "style" in kwargs:
             style = True
